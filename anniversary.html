@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2 Years of Us 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Lato:wght@300;400;700&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --midnight: #150810;
+      --deep-rose: #2a0f1e;
+      --blush: #f5c6d8;
+      --gold: #d4a853;
+      --ivory: #fff8f0;
+      --mauve: #c4889a;
+      --rose-mid: #8b3a5a;
+      --petal: #f8d7e3;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--midnight);
+      color: var(--ivory);
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── PETAL CANVAS ── */
+    #petal-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; width: 100%;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: center;
+      gap: 36px;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(21,8,16,0.9), transparent);
+    }
+
+    nav a {
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--mauve);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      z-index: 1;
+      padding: 20px;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      color: var(--gold);
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeUp 1s 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(52px, 10vw, 110px);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ivory);
+      text-shadow: 0 0 60px rgba(212,168,83,0.3);
+      opacity: 0;
+      animation: fadeUp 1s 0.6s forwards;
+    }
+
+    .hero-title span {
+      display: block;
+      font-style: italic;
+      color: var(--blush);
+    }
+
+    .hero-subtitle {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(15px, 2.5vw, 22px);
+      color: var(--mauve);
+      margin-top: 20px;
+      max-width: 520px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 1s 0.9s forwards;
+    }
+
+    .hero-divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 28px auto;
+      opacity: 0;
+      animation: fadeUp 1s 1.1s forwards;
+    }
+
+    .heart-pulse {
+      font-size: 48px;
+      display: inline-block;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      opacity: 0;
+      animation: heartbeat 1.4s 1.4s ease-in-out infinite, fadeUp 1s 1.3s forwards;
+    }
+
+    /* ── COUNTER ── */
+    #counter {
+      position: relative;
+      z-index: 1;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .counter-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      color: var(--gold);
+      margin-bottom: 30px;
+    }
+
+    .counter-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(16px, 4vw, 60px);
+      flex-wrap: wrap;
+    }
+
+    .counter-box {
+      background: rgba(245,198,216,0.06);
+      border: 1px solid rgba(212,168,83,0.25);
+      border-radius: 16px;
+      padding: 28px 36px;
+      min-width: 110px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .counter-box:hover {
+      transform: translateY(-6px);
+      border-color: var(--gold);
+    }
+
+    .counter-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 6vw, 60px);
+      color: var(--blush);
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .counter-unit {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mauve);
+      margin-top: 6px;
+    }
+
+    /* ── SECTION COMMON ── */
+    section {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 18px;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 5vw, 48px);
+      text-align: center;
+      color: var(--ivory);
+      margin-bottom: 48px;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      padding: 80px 40px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .gallery-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(196,136,154,0.2);
+      cursor: pointer;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease, box-shadow 0.3s;
+    }
+
+    .gallery-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .gallery-card:hover {
+      box-shadow: 0 20px 60px rgba(212,168,83,0.15);
+    }
+
+    .gallery-img {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: contain;
+      display: block;
+      transition: transform 0.5s;
+      background: linear-gradient(135deg, #2a0f1e, #1f0d1a);
+    }
+
+    .gallery-card:hover .gallery-img {
+      transform: scale(1.06);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(21,8,16,0.85) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 20px;
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-caption {
+      font-family: 'Dancing Script', cursive;
+      font-size: 18px;
+      color: var(--blush);
+    }
+
+    /* placeholder icon */
+    .gallery-placeholder {
+      width: 100%;
+      aspect-ratio: 4/5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #2a0f1e 0%, #1a0a14 100%);
+      color: rgba(196,136,154,0.4);
+      gap: 10px;
+    }
+    .gallery-placeholder svg { width: 40px; height: 40px; }
+    .gallery-placeholder p { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
+
+    /* ── QUOTES CAROUSEL ── */
+    #quotes {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .quote-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      min-height: 180px;
+    }
+
+    .quote-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s, transform 0.8s;
+      pointer-events: none;
+    }
+    .quote-item.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(18px, 3vw, 26px);
+      font-style: italic;
+      color: var(--ivory);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .quote-text::before { content: '\201C'; color: var(--gold); font-size: 1.4em; }
+    .quote-text::after  { content: '\201D'; color: var(--gold); font-size: 1.4em; }
+
+    .quote-author {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      color: var(--mauve);
+    }
+
+    .quote-dots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+
+    .qdot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--mauve);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .qdot.active { background: var(--gold); transform: scale(1.4); }
+
+    /* ── MILESTONE TIMELINE ── */
+    #timeline {
+      padding: 80px 20px 100px;
+      overflow: hidden;
+    }
+
+    /* — vertical spine — */
+    .ms-spine-wrap {
+      position: relative;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .ms-spine-wrap::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(212,168,83,0.6) 8%,
+        rgba(212,168,83,0.6) 92%,
+        transparent 100%);
+      transform: translateX(-50%);
+    }
+
+    /* — each milestone row — */
+    .ms-item {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr;
+      align-items: center;
+      margin-bottom: 64px;
+      opacity: 0;
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .ms-item:nth-child(odd)  { transform: translateX(-40px); }
+    .ms-item:nth-child(even) { transform: translateX( 40px); }
+    .ms-item.visible { opacity: 1; transform: translateX(0); }
+
+    /* card on the LEFT (odd items) */
+    .ms-item:nth-child(odd)  .ms-card { grid-column: 1; text-align: right; padding-right: 32px; }
+    .ms-item:nth-child(odd)  .ms-center { grid-column: 2; }
+    .ms-item:nth-child(odd)  .ms-empty  { grid-column: 3; }
+
+    /* card on the RIGHT (even items) */
+    .ms-item:nth-child(even) .ms-empty  { grid-column: 1; }
+    .ms-item:nth-child(even) .ms-center { grid-column: 2; }
+    .ms-item:nth-child(even) .ms-card   { grid-column: 3; text-align: left; padding-left: 32px; }
+
+    /* — the glowing node in the centre — */
+    .ms-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ms-node {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--deep-rose);
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 0 6px rgba(212,168,83,0.1), 0 0 24px rgba(212,168,83,0.25);
+      transition: box-shadow 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .ms-item:hover .ms-node {
+      box-shadow: 0 0 0 10px rgba(212,168,83,0.15), 0 0 40px rgba(212,168,83,0.4);
+      transform: scale(1.1);
+    }
+
+    /* — connector lines from card to node — */
+    .ms-item:nth-child(odd)  .ms-card::after,
+    .ms-item:nth-child(even) .ms-card::before {
+      display: none; /* handled via padding */
+    }
+
+    /* — the card itself — */
+    .ms-card {
+      background: rgba(245,198,216,0.04);
+      border: 1px solid rgba(212,168,83,0.18);
+      border-radius: 18px;
+      padding: 22px 26px;
+      transition: background 0.3s, border-color 0.3s, transform 0.3s;
+    }
+
+    .ms-item:hover .ms-card {
+      background: rgba(212,168,83,0.06);
+      border-color: rgba(212,168,83,0.45);
+      transform: translateY(-4px);
+    }
+
+    .ms-card-date {
+      font-family: 'Dancing Script', cursive;
+      font-size: 15px;
+      color: var(--gold);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .ms-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blush);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .ms-card-desc {
+      font-size: 13px;
+      color: var(--mauve);
+      line-height: 1.75;
+    }
+
+    /* — "Today" final node — */
+    .ms-end {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+    }
+    .ms-end.visible { opacity: 1; transform: scale(1); }
+
+    .ms-end-ring {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #3a1028, var(--deep-rose));
+      border: 2px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 0 0 8px rgba(212,168,83,0.12), 0 0 40px rgba(212,168,83,0.35);
+      animation: todayPulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes todayPulse {
+      0%, 100% { box-shadow: 0 0 0 8px rgba(212,168,83,0.12), 0 0 40px rgba(212,168,83,0.3); }
+      50%       { box-shadow: 0 0 0 16px rgba(212,168,83,0.06), 0 0 60px rgba(212,168,83,0.5); }
+    }
+
+    .ms-end-label {
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      color: var(--gold);
+    }
+    .ms-end-sub {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mauve);
+    }
+
+    /* mobile: single column */
+    @media (max-width: 640px) {
+      .ms-spine-wrap::before { left: 28px; }
+      .ms-item {
+        grid-template-columns: 56px 1fr !important;
+        grid-template-rows: auto;
+        transform: translateX(-20px) !important;
+        margin-bottom: 48px;
+      }
+      .ms-item:nth-child(odd)  .ms-card,
+      .ms-item:nth-child(even) .ms-card  { grid-column: 2; text-align: left; padding-left: 20px; padding-right: 0; }
+      .ms-item:nth-child(odd)  .ms-center,
+      .ms-item:nth-child(even) .ms-center { grid-column: 1; }
+      .ms-item:nth-child(odd)  .ms-empty,
+      .ms-item:nth-child(even) .ms-empty  { display: none; }
+      .ms-node { width: 42px; height: 42px; font-size: 18px; }
+    }
+
+    /* ── LOVE LETTER ── */
+    #letter {
+      padding: 80px 20px;
+    }
+
+    .letter-box {
+      max-width: 680px;
+      margin: 0 auto;
+      background: rgba(245,198,216,0.04);
+      border: 1px solid rgba(212,168,83,0.18);
+      border-radius: 24px;
+      padding: clamp(30px, 5vw, 60px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter-box::before {
+      content: '♡';
+      position: absolute;
+      font-size: 200px;
+      color: rgba(245,198,216,0.03);
+      right: -30px;
+      top: -40px;
+      pointer-events: none;
+    }
+
+    .letter-date {
+      font-family: 'Dancing Script', cursive;
+      font-size: 16px;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .letter-body {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(15px, 2vw, 18px);
+      color: var(--ivory);
+      line-height: 2;
+    }
+
+    .letter-sign {
+      font-family: 'Dancing Script', cursive;
+      font-size: 28px;
+      color: var(--blush);
+      margin-top: 30px;
+      text-align: right;
+    }
+
+    /* ── PHOTO STRIP ── */
+    #strip {
+      padding: 40px 0;
+      overflow: hidden;
+    }
+
+    .strip-track {
+      display: flex;
+      gap: 16px;
+      animation: stripScroll 25s linear infinite;
+      width: max-content;
+    }
+    .strip-track:hover { animation-play-state: paused; }
+
+    @keyframes stripScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .strip-img {
+      width: 220px;
+      height: 280px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(212,168,83,0.15);
+    }
+
+    .strip-placeholder {
+      width: 220px;
+      height: 280px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #2a0f1e, #200d1b);
+      border: 1px dashed rgba(196,136,154,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(196,136,154,0.3);
+      gap: 8px;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    /* ── PROMISE SECTION ── */
+    #promises {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .promise-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .promise-card {
+      background: rgba(245,198,216,0.04);
+      border: 1px solid rgba(196,136,154,0.18);
+      border-radius: 20px;
+      padding: 36px 24px;
+      transition: transform 0.3s, border-color 0.3s, background 0.3s;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s;
+    }
+
+    .promise-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .promise-card:hover {
+      border-color: var(--gold);
+      background: rgba(212,168,83,0.05);
+      box-shadow: 0 10px 40px rgba(212,168,83,0.08);
+    }
+
+    .promise-icon { font-size: 32px; margin-bottom: 14px; }
+
+    .promise-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: var(--blush);
+      margin-bottom: 10px;
+    }
+
+    .promise-text {
+      font-size: 13px;
+      color: var(--mauve);
+      line-height: 1.8;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px 40px;
+      text-align: center;
+    }
+
+    .footer-heart {
+      font-size: 40px;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+
+    .footer-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 32px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .footer-sub {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mauve);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.2); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.15); }
+      70%       { transform: scale(1); }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--midnight); }
+    ::-webkit-scrollbar-thumb { background: var(--rose-mid); border-radius: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .timeline-wrap::before { left: 20px; }
+      .tl-item, .tl-item:nth-child(even) {
+        flex-direction: column;
+        padding-left: 40px;
+        transform: translateX(0) !important;
+      }
+      .tl-dot { position: absolute; left: 13px; }
+      .tl-item { position: relative; }
+      .tl-content, .tl-item:nth-child(even) .tl-content { text-align: left; }
+      nav { gap: 16px; padding: 14px 20px; flex-wrap: wrap; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .strip-track { animation: none; }
+      .heart-pulse { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Petal Canvas -->
+<canvas id="petal-canvas"></canvas>
+
+<!-- Nav -->
+<nav>
+  <a href="#hero">Home</a>
+  <a href="#gallery">Gallery</a>
+  <a href="#timeline">Our Story</a>
+  <a href="#letter">Letter</a>
+  <a href="#promises">Promises</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <p class="hero-eyebrow">Happy 2nd Anniversary, My Love</p>
+  <h1 class="hero-title">
+    Two Years<br>
+    <span>of Forever</span>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-subtitle">"Every moment with you feels like a lifetime of love, and every lifetime feels too short."</p>
+  <div style="margin-top: 32px; opacity:0; animation: fadeUp 1s 1.3s forwards;">
+    <span class="heart-pulse" style="animation: heartbeat 1.4s ease-in-out infinite;">💕</span>
+  </div>
+</section>
+
+<!-- ── COUNTER ── -->
+<section id="counter">
+  <p class="counter-label">We have been together for</p>
+  <div class="counter-grid">
+    <div class="counter-box">
+      <div class="counter-num" id="cnt-days">—</div>
+      <div class="counter-unit">Days</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-num" id="cnt-hours">—</div>
+      <div class="counter-unit">Hours</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-num" id="cnt-mins">—</div>
+      <div class="counter-unit">Minutes</div>
+    </div>
+    <div class="counter-box">
+      <div class="counter-num" id="cnt-secs">—</div>
+      <div class="counter-unit">Seconds</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GALLERY ── -->
+<section id="gallery">
+  <p class="section-label">our memories</p>
+<h2 class="section-title">Moments Captured in Time</h2>
+<h2 class="gallery-hint">✨ Touch any image to view it fullscreen ✨</h2>  <div class="gallery-grid">
+    <!-- Replace src with your images: assets/photo1.jpg etc. -->
+   <div class="gallery-card">
+  <img src="images/our first selfie.jpeg"
+       alt="Our First Selfie"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">Our First Selfie</span>
+  </div>
+</div>
+
+    <div class="gallery-card" style="transition-delay: 0.1s">
+  <img src="images/our first lunch together.jpeg"
+       alt="Our First Lunch Together"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">Our First Lunch Together</span>
+  </div>
+</div>  
+
+   <div class="gallery-card" style="transition-delay: 0.2s">
+  <img src="images/first time holding hands.jpeg"
+       alt="The moment I Felt your body heat"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">The moment i Felt your body heat</span>
+  </div>
+</div>
+    <div class="gallery-card" style="transition-delay: 0.3s">
+  <img src="images/i fell.jpeg"
+       alt="First Time I Fell"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">First Time I Fell</span>
+  </div>
+</div>
+<div class="gallery-card" style="transition-delay: 0.4s">
+  <img src="images/your first lu.jpeg"
+       alt="Man expressing his Love"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">Man expressing his Love</span>
+  </div>
+</div>
+    <div class="gallery-card" style="transition-delay: 0.5s">
+  <img src="images/first date.jpeg"
+       alt="Our First Date"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">Our First date - 24/06/2026</span>
+  </div>
+</div>
+
+    <div class="gallery-card" style="transition-delay: 0.5s">
+  <img src="images/our last selfie.jpeg"
+       alt="Our Last Selfie"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">Our Last Selfie</span>
+  </div>
+</div>
+
+   <div class="gallery-card" style="transition-delay: 0.5s">
+  <img src="images/my favourite photo of u.jpeg"
+       alt="My Favourite Pic Of Yours"
+       class="gallery-img">
+
+  <div class="gallery-overlay">
+    <span class="gallery-caption">My favourite pic of Yours</span>
+  </div>
+</div>
+
+  </div>
+</section>
+
+<!-- ── QUOTES ── -->
+<section id="quotes">
+  <p class="section-label">love notes</p>
+  <h2 class="section-title">Words That Belong to Us</h2>
+  <div class="quote-wrapper">
+    <div class="quote-item active">
+      <p class="quote-text">I have waited for this opportunity for more than half a lifetime. You are the one I want to spend the rest of my life with.</p>
+      <p class="quote-author">— When Harry Met Sally</p>
+    </div>
+    <div class="quote-item">
+      <p class="quote-text">Whatever our souls are made of, yours and mine are the same.</p>
+      <p class="quote-author">— Emily Brontë</p>
+    </div>
+    <div class="quote-item">
+      <p class="quote-text">You are my today and all of my tomorrows.</p>
+      <p class="quote-author">— Leo Christopher</p>
+    </div>
+    <div class="quote-item">
+      <p class="quote-text">I love you not only for what you are, but for what I am when I am with you.</p>
+      <p class="quote-author">— Roy Croft</p>
+    </div>
+    <div class="quote-item">
+      <p class="quote-text">In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine.</p>
+      <p class="quote-author">— Maya Angelou</p>
+    </div>
+  </div>
+  <div class="quote-dots" id="quote-dots"></div>
+</section>
+
+<!-- ── MILESTONE TIMELINE ── -->
+<section id="timeline">
+  <p class="section-label">how it all began</p>
+  <h2 class="section-title">Every Chapter of Us</h2>
+
+  <div class="ms-spine-wrap">
+
+    <!-- 1 -->
+    <div class="ms-item">
+      <div class="ms-card">
+        <span class="ms-card-date">October 18, 2023</span>
+        <h3 class="ms-card-title">The First Hello</h3>
+        <p class="ms-card-desc">A conversation that started everything. Neither of us knew that this one message would become the first page of the greatest story of our lives.</p>
+      </div>
+      <div class="ms-center">
+        <div class="ms-node">💬</div>
+      </div>
+      <div class="ms-empty"></div>
+    </div>
+
+    <!-- 2 -->
+    <div class="ms-item">
+      <div class="ms-empty"></div>
+      <div class="ms-center">
+        <div class="ms-node">💌</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-card-date">June 19, 2024</span>
+        <h3 class="ms-card-title">He Said "I Love You" First</h3>
+        <p class="ms-card-desc">He was brave enough to say it first — three words that made your heart stop and the world feel softer. The moment everything changed.</p>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="ms-item">
+      <div class="ms-card">
+        <span class="ms-card-date">June 21, 2024</span>
+        <h3 class="ms-card-title">Our Love Story Begins</h3>
+        <p class="ms-card-desc">The day we made it real. Two people who chose each other — officially, completely, and with a full heart. This is where we became us.</p>
+      </div>
+      <div class="ms-center">
+        <div class="ms-node">💑</div>
+      </div>
+      <div class="ms-empty"></div>
+    </div>
+
+    <!-- 4 -->
+    <div class="ms-item">
+      <div class="ms-empty"></div>
+      <div class="ms-center">
+        <div class="ms-node">💋</div>
+      </div>
+      <div class="ms-card">
+        <span class="ms-card-date">June 24, 2024</span>
+        <h3 class="ms-card-title">Our First Kiss</h3>
+        <p class="ms-card-desc">A moment so tender it still lives in our hearts. Time stopped, the world disappeared — and it was just us.</p>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="ms-item">
+      <div class="ms-card">
+        <span class="ms-card-date">June 25, 2024</span>
+        <h3 class="ms-card-title">Our First Date</h3>
+        <p class="ms-card-desc">Nervous smiles, happy hearts, and the quiet feeling of knowing — this is something real, and it's only the beginning.</p>
+      </div>
+      <div class="ms-center">
+        <div class="ms-node">🌹</div>
+      </div>
+      <div class="ms-empty"></div>
+    </div>
+
+    <!-- END NODE -->
+    <div class="ms-end" id="ms-end">
+      <div class="ms-end-ring">💕</div>
+      <p class="ms-end-label">Today & Always</p>
+      <p class="ms-end-sub">Two beautiful years · and counting forever</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PHOTO STRIP ── -->
+<section id="strip">
+  <div class="strip-track" id="strip-track">
+    <!-- Duplicated for infinite loop feel -->
+    <div class="strip-placeholder"><p>photo1.jpg</p></div>
+    <div class="strip-placeholder"><p>photo2.jpg</p></div>
+    <div class="strip-placeholder"><p>photo3.jpg</p></div>
+    <div class="strip-placeholder"><p>photo4.jpg</p></div>
+    <div class="strip-placeholder"><p>photo5.jpg</p></div>
+    <div class="strip-placeholder"><p>photo6.jpg</p></div>
+    <!-- Duplicate for seamless loop -->
+    <div class="strip-placeholder"><p>photo1.jpg</p></div>
+    <div class="strip-placeholder"><p>photo2.jpg</p></div>
+    <div class="strip-placeholder"><p>photo3.jpg</p></div>
+    <div class="strip-placeholder"><p>photo4.jpg</p></div>
+    <div class="strip-placeholder"><p>photo5.jpg</p></div>
+    <div class="strip-placeholder"><p>photo6.jpg</p></div>
+  </div>
+</section>
+
+<!-- ── LOVE LETTER ── -->
+<section id="letter">
+  <p class="section-label">from my heart</p>
+  <h2 class="section-title">A Letter, Just For You</h2>
+  <div class="letter-box">
+    <p class="letter-date">On our 2nd Anniversary</p>
+    <div class="letter-body">
+      <p>My love,</p><br>
+      <p>Two years ago, I didn't know that one small moment would lead to the greatest story of my life — yours and mine.</p><br>
+      <p>You have been my calm in every storm, my laughter on the hardest days, and the face I want to see at the end of every single one. You make ordinary moments feel extraordinary just by being in them.</p><br>
+      <p>I don't know everything about what tomorrow holds, but I know this — I want every tomorrow to have you in it. Thank you for choosing me, again and again.</p><br>
+      <p>Happy 2nd Anniversary. Here's to forever.</p>
+    </div>
+    <p class="letter-sign">With all my love 💕</p>
+  </div>
+</section>
+
+<!-- ── PROMISES ── -->
+<section id="promises">
+  <p class="section-label">forever vows</p>
+  <h2 class="section-title">Promises I Keep</h2>
+  <div class="promise-grid">
+    <div class="promise-card">
+      <div class="promise-icon">🌙</div>
+      <h3 class="promise-title">Always By Your Side</h3>
+      <p class="promise-text">Through every late night, every worry, every fear — I will be there. Not just when it's easy, but when it matters most.</p>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">☀️</div>
+      <h3 class="promise-title">Make You Smile Every Day</h3>
+      <p class="promise-text">I promise to find a hundred small ways to remind you of joy, because your smile is the most beautiful thing I know.</p>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">🌿</div>
+      <h3 class="promise-title">Grow With You</h3>
+      <p class="promise-text">I promise to grow alongside you — to change, to learn, and to love you better with every passing season.</p>
+    </div>
+    <div class="promise-card">
+      <div class="promise-icon">💫</div>
+      <h3 class="promise-title">Choose You, Always</h3>
+      <p class="promise-text">Every day, I will choose you — not because I have to, but because loving you is the easiest and best decision I have ever made.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-heart">💕</div>
+  <p class="footer-title">Two Years Down, Forever to Go</p>
+  <p class="footer-sub">With Love &nbsp;·&nbsp; Always &nbsp;·&nbsp; Forever</p>
+</footer>
+
+<script>
+// ── PETAL PARTICLE SYSTEM ──
+const canvas = document.getElementById('petal-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, petals = [];
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+const PETAL_COUNT = 35;
+const SHAPES = ['❤', '♡', '🌸'];
+
+class Petal {
+  constructor() { this.reset(true); }
+  reset(init) {
+    this.x    = Math.random() * W;
+    this.y    = init ? Math.random() * H : -20;
+    this.size = Math.random() * 16 + 8;
+    this.speed= Math.random() * 1.2 + 0.4;
+    this.drift= (Math.random() - 0.5) * 0.6;
+    this.rot  = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.03;
+    this.alpha= Math.random() * 0.35 + 0.1;
+    this.shape= SHAPES[Math.floor(Math.random() * SHAPES.length)];
+  }
+  update() {
+    this.y   += this.speed;
+    this.x   += this.drift;
+    this.rot += this.rotSpeed;
+    if (this.y > H + 20) this.reset(false);
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.alpha;
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.font = `${this.size}px serif`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(this.shape, 0, 0);
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < PETAL_COUNT; i++) petals.push(new Petal());
+
+function animatePetals() {
+  ctx.clearRect(0, 0, W, H);
+  petals.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animatePetals);
+}
+animatePetals();
+
+// ── ANNIVERSARY COUNTER ──
+// 🔧 Set your anniversary start date here:
+const START = new Date('2024-06-21T00:00:00');
+
+function updateCounter() {
+  const diff = Date.now() - START.getTime();
+  const secs  = Math.floor(diff / 1000);
+  const mins  = Math.floor(secs / 60);
+  const hours = Math.floor(mins / 60);
+  const days  = Math.floor(hours / 24);
+  document.getElementById('cnt-days').textContent  = days.toLocaleString();
+  document.getElementById('cnt-hours').textContent = (hours % 24).toString().padStart(2,'0');
+  document.getElementById('cnt-mins').textContent  = (mins % 60).toString().padStart(2,'0');
+  document.getElementById('cnt-secs').textContent  = (secs % 60).toString().padStart(2,'0');
+}
+updateCounter();
+setInterval(updateCounter, 1000);
+
+// ── QUOTE CAROUSEL ──
+const quoteItems = document.querySelectorAll('.quote-item');
+const dotsWrap   = document.getElementById('quote-dots');
+let currentQ = 0, quoteTimer;
+
+quoteItems.forEach((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'qdot' + (i === 0 ? ' active' : '');
+  d.addEventListener('click', () => goToQuote(i));
+  dotsWrap.appendChild(d);
+});
+
+function goToQuote(n) {
+  quoteItems[currentQ].classList.remove('active');
+  dotsWrap.children[currentQ].classList.remove('active');
+  currentQ = (n + quoteItems.length) % quoteItems.length;
+  quoteItems[currentQ].classList.add('active');
+  dotsWrap.children[currentQ].classList.add('active');
+  clearInterval(quoteTimer);
+  quoteTimer = setInterval(() => goToQuote(currentQ + 1), 4500);
+}
+
+quoteTimer = setInterval(() => goToQuote(currentQ + 1), 4500);
+
+// ── SCROLL REVEAL ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.gallery-card, .ms-item, .ms-end, .promise-card').forEach(el => {
+  revealObserver.observe(el);
+});
+
+// Stagger promise cards
+document.querySelectorAll('.promise-card').forEach((card, i) => {
+  card.style.transitionDelay = `${i * 0.12}s`;
+});
+</script>
+
+</body>
+</html>
