@@ -237,10 +237,11 @@
     .gallery-img {
       width: 100%;
       aspect-ratio: 4/5;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
       transition: transform 0.5s;
       background: linear-gradient(135deg, #2a0f1e, #1f0d1a);
+      image-orientation: from-image;
     }
 
     .gallery-card:hover .gallery-img {
@@ -605,6 +606,7 @@
       object-fit: cover;
       flex-shrink: 0;
       border: 2px solid rgba(212,168,83,0.15);
+      image-orientation: from-image;
     }
 
     .strip-placeholder {
@@ -778,6 +780,8 @@
     #lightbox-img {
       max-width: 92vw;
       max-height: 88vh;
+      width: auto;
+      height: auto;
       object-fit: contain;
       border-radius: 12px;
       box-shadow: 0 0 80px rgba(212, 168, 83, 0.18), 0 0 0 1px rgba(212, 168, 83, 0.15);
@@ -785,6 +789,9 @@
       animation: lbZoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
       user-select: none;
       -webkit-user-drag: none;
+      image-orientation: from-image;
+      display: block;
+      background: transparent;
     }
 
     @keyframes lbZoomIn {
@@ -899,7 +906,7 @@
     @media (max-width: 480px) {
       #lightbox-img {
         max-width: 96vw;
-        max-height: 82vh;
+        max-height: 78vh;
       }
       #lightbox-close {
         top: 12px;
@@ -909,8 +916,8 @@
         font-size: 20px;
       }
       #lightbox-caption {
-        font-size: 17px;
-        bottom: 16px;
+        font-size: 19px;
+        padding: 18px 60px 16px;
       }
     }
   </style>
@@ -976,7 +983,8 @@
    <div class="gallery-card">
   <img src="images/our first selfie.jpeg"
        alt="Our First Selfie"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">Our First Selfie</span>
@@ -986,7 +994,8 @@
     <div class="gallery-card" style="transition-delay: 0.1s">
   <img src="images/our first lunch together.jpeg"
        alt="Our First Lunch Together"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">Our First Lunch Together</span>
@@ -996,7 +1005,8 @@
    <div class="gallery-card" style="transition-delay: 0.2s">
   <img src="images/first time holding hands.jpeg"
        alt="The moment I Felt your body heat"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">The moment i Felt your body heat</span>
@@ -1005,7 +1015,8 @@
     <div class="gallery-card" style="transition-delay: 0.3s">
   <img src="images/i fell.jpeg"
        alt="First Time I Fell"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">First Time I Fell</span>
@@ -1014,7 +1025,8 @@
 <div class="gallery-card" style="transition-delay: 0.4s">
   <img src="images/your first lu.jpeg"
        alt="Man expressing his Love"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">Man expressing his Love</span>
@@ -1023,7 +1035,8 @@
     <div class="gallery-card" style="transition-delay: 0.5s">
   <img src="images/first date.jpeg"
        alt="Our First Date"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">Our First date - 24/06/2026</span>
@@ -1033,7 +1046,8 @@
     <div class="gallery-card" style="transition-delay: 0.5s">
   <img src="images/our last selfie.jpeg"
        alt="Our Last Selfie"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">Our Last Selfie</span>
@@ -1043,7 +1057,8 @@
    <div class="gallery-card" style="transition-delay: 0.5s">
   <img src="images/my favourite photo of u.jpeg"
        alt="My Favourite Pic Of Yours"
-       class="gallery-img">
+       class="gallery-img"
+       loading="lazy">
 
   <div class="gallery-overlay">
     <span class="gallery-caption">My favourite pic of Yours</span>
@@ -1170,41 +1185,53 @@
     <!-- Duplicated for infinite loop feel -->
  <img src="images/photo1.jpeg"
      alt="Photo 1"
-     class="strip-img">
+     class="strip-img"
+     loading="lazy">
    <img src="images/photo2.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 2"
+     class="strip-img"
+     loading="lazy">
     <img src="images/photo3.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 3"
+     class="strip-img"
+     loading="lazy">
    <img src="images/photo4.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 4"
+     class="strip-img"
+     loading="lazy">
    <img src="images/photo5.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 5"
+     class="strip-img"
+     loading="lazy">
     <img src="images/photo6.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 6"
+     class="strip-img"
+     loading="lazy">
     <!-- Duplicate for seamless loop -->
     <img src="images/photo1.jpeg"
      alt="Photo 1"
-     class="strip-img">
+     class="strip-img"
+     loading="lazy">
      <img src="images/photo2.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 2"
+     class="strip-img"
+     loading="lazy">
     <img src="images/photo3.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 3"
+     class="strip-img"
+     loading="lazy">
    <img src="images/photo4.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 4"
+     class="strip-img"
+     loading="lazy">
    <img src="images/photo5.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 5"
+     class="strip-img"
+     loading="lazy">
      <img src="images/photo6.jpeg"
-     alt="Photo 1"
-     class="strip-img">
+     alt="Photo 6"
+     class="strip-img"
+     loading="lazy">
   </div>
 </section>
 
@@ -1220,7 +1247,7 @@
       <p> Epdi nu therla..unta pesa start panadhula irundhu oru nalla bonding kedachudhu..enaku unaya romba pudichuchu..naa enoda seamless love unaku kuduthen..unaku enoda paasam pudichudhu..so..neeyum enta anbaa irundha..andha anbu..days poga poga..enaku love ah maaruchu...unta sonen..konjam naal kalichu unakkum en mela love vandhuchu..</p><br>
       <p>Anga start aachu....nammaa happy lifee...❤️‍🔥🤌🏻.</p><br>
       <p>Unaku theriyaama naa unaya avloo anuu anuu vaa rasippenn..en kannuku ullayee unaya othii vechuppen..</p><br>
-      <p>Nee na enaku avlooo pudikum chellom..enoda usuree nee dhan thanga pullaa..</p></p><br>
+      <p>Nee na enaku avlooo pudikum chellom..enoda usuree nee dhan thanga pullaa..</p><br>
       <p>Ovvoru nodiyumm unaya rasikkama naa irundhadhee illaa patttuu...</p><br>
       <p>I PROMISE YOU..UN LIFE LA YAAR UNKOODA IRUKRANGALO ILLAYOO..THIS PD KUTTI WILL ALWAYS BE WITH YOU EN MANJA KOLANDHAYEE</p><br>
       <p>Happy 2nd Anniversary Yaana Papaa..!! 🐘💋</p>
